@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import io
-import pandas_profiling
+import pandas_profiling 
 retail_raw = pd.read_csv('https://storage.googleapis.com/dqlab-dataset/retail_raw_reduced_data_quality.csv')
 
 # Cetak tipe data di setiap kolom retail_raw
@@ -61,3 +61,10 @@ print(retail_raw['quantity'].quantile([0.25, 0.5, 0.75]))
 print('')
 print('Kolom item_price: ')
 print(retail_raw['item_price'].quantile([0.25, 0.5, 0.75]))
+
+print('Korelasi quantity dengan item_price')
+print(retail_raw[['quantity', 'item_price']].corr())
+
+# Penggunaan ProfileReport pada dataframe: retail_raw
+adjii = pandas_profiling.ProfileReport(retail_raw)
+adjii.to_file("data profiling.html")
