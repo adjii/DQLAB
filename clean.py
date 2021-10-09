@@ -26,7 +26,7 @@ Q3 = retail_raw['item_price'].quantile(0.75)
 IQR = Q3 - Q1
 
 # Removing outliers
-# retail_raw = retail_raw[~((retail_raw['item_price'] < (Q1 - 1.5 * IQR)) | (retail_raw['item_price'] > (Q3 - 1.5 * IQR)))]
+# retail_raw = retail_raw[~((retail_raw['item_price'] < (Q1 - 1.5 * IQR)) | (retail_raw['item_price'] > (Q3 + 1.5 * IQR)))]
 
 # Tugas Praktek
 # Check ukuran (baris dan kolom) sebelum data yang outliers
