@@ -94,6 +94,7 @@ arr_df = np.array([[1  ,2  ,3  ,5],
 ex_df = pd.DataFrame(arr_df)
 print(ex_df)
 
+# Dataset I/O
 # File CSV
 df_csv = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_csv.csv")
 print(df_csv.head(3)) # Menampilkan 3 data teratas
