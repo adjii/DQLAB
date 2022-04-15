@@ -151,7 +151,7 @@ df_covid19_eu_summary = pd.read_gbq(query, project_id="XXXXXXXX")
 # Tampilkan 5 data teratas
 df_covid19_eu_summary
 
-#%%
+# #%%
 import pandas as pd
 # Baca file sample_csv.csv
 df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_csv.csv")
@@ -160,4 +160,36 @@ print("Tiga data teratas:\n", df.head(3))
 # Tampilkan 3 data terbawah
 print("Tiga data terbawah:\n", df.tail(3))
 
-# %%
+# Indexing, Slicing, dan Transforming
+# Indexing - Part 2
+# #%%
+import pandas as pd
+# Baca file TSV sample_tsv.tsv
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_tsv.tsv", sep="\t")
+# Index dari df
+print("Index:", df.index)
+# Column dari df
+print("Columns:", df.columns)
+
+# Indexing - Part 3
+# #%%
+import pandas as pd
+# Baca file TSV sample_tsv.tsv
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_tsv.tsv", sep="\t")
+# Set multi index df
+df_x = df.set_index(['order_date', 'city', 'customer_id'])
+# Print nama dan level dari multi index
+for name, level in zip(df_x.index.names, df_x.index.levels):
+    print(name, ':', level)
+
+# Indexing - Part 4
+# #%%
+import pandas as pd
+# Baca file sample_tsv.tsv untuk 10 baris pertama saja
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_tsv.tsv", sep="\t", nrows=10)
+# Cetak data frame awal
+print("Dataframe awal:\n", df)
+# Set index baru
+df.index = ["Pesanan ke-" + str(i) for i in range(1, 11)]
+# Cetak data framme dengan index baru
+print("Dataframe dengan index baru:\n", df)
