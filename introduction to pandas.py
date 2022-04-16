@@ -193,3 +193,43 @@ print("Dataframe awal:\n", df)
 df.index = ["Pesanan ke-" + str(i) for i in range(1, 11)]
 # Cetak data framme dengan index baru
 print("Dataframe dengan index baru:\n", df)
+
+# Indexing - Part 5
+# #%%
+import pandas as pd
+# Baca file sample_tsv.tsv dan set lah index_col sesuai instruksi
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_tsv.tsv", sep="\t", index_col=["order_date","order_id"])
+# Cetak data frame untuk 8 data teratas
+print("Dataframe:\n", df.head(8))
+
+# Quiz
+# #%%
+import pandas as pd
+df_week = pd.DataFrame({'day_number':[1,2,3,4,5,6,7],'week_type':['weekday' for i in range(5)] + ['weekend' for i in range(2)]})
+df_week_ix = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+df_week.index = [df_week_ix, df_week['day_number'].to_list()]
+df_week.index.names = ['name','num']
+print(df_week)
+
+# Slicing - Part 1
+# #%%
+import pandas as pd
+# Baca file sample_csv.csv
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_csv.csv")
+# Slice langsung berdasarkan kolom
+df_slice = df.loc[(df["customer_id"] == 18055) & 
+                  (df["product_id"].isin(["P0029","P0040","P0041","P0116","P0117"]))
+                 ]
+print("Slice langsung berdasarkan kolom:\n", df_slice)
+
+# Slicing - Part 2
+#%%
+import pandas as pd
+# Baca file sample_csv.csv
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/sample_csv.csv")
+# Set index dari df sesuai instruksi
+df = df.set_index(["order_date","order_id","product_id"])
+# Slice sesuai instruksi
+df_slice = df.loc[("2019-01-01",1612339,["P2154","P2159"]),:]
+print("Slice df:\n", df_slice)
+# %%
