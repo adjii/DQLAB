@@ -276,7 +276,7 @@ df["brand"] = df["brand"].map(lambda x: x[-1])
 print("Kolom brand setelah map:\n", df["brand"].head())
 
 # Transforming - Part 4
-# %%
+# #%%
 import numpy as np
 import pandas as pd
 # number generator, set angka seed menjadi suatu angka, bisa semua angka, supaya hasil random nya selalu sama ketika kita run
@@ -293,4 +293,42 @@ def qudratic_fun(x):
     return x**2 + 3*x +2
 df_tr2 = df_tr.applymap(qudratic_fun)
 print("\nDataframe - cara 2:\n", df_tr2)
+
+# Handling Missing Values
+# Inspeksi Missing Value
+# #%%
+import pandas as pd
+# Baca file "public data covid19 jhu csse eu.csv"
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/CHAPTER%204%20-%20missing%20value%20-%20public%20data%20covid19%20.csv")
+# Cetak info dari df
+print(df.info())
+# Cetak jumlah missing value di setiap kolom
+mv = df.isna().sum()
+print("\nJumlah missing value per kolom:\n", mv)
+
+# Treatment untuk Missing Value - Part 2
+# %%
+import pandas as pd
+# Baca file "public data covid19 jhu csse eu.csv"
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/CHAPTER%204%20-%20missing%20value%20-%20public%20data%20covid19%20.csv")
+# Cetak ukuran awal dataframe
+print("Ukuran awal df: %d baris, %d kolom." % df.shape)
+# Drop kolom yang seluruhnya missing value dan cetak ukurannya
+df = df.dropna(axis=1, how="all")
+print("Ukuran df setelah buang kolom dengan seluruh data missing: %d baris, %d kolom." % df.shape)
+# Drop baris jika ada satu saja data yang missing dan cetak ukurannya
+df = df.dropna(axis=0, how="any")
+print("Ukuran df setelah dibuang baris yang dimiliki sekurangnya 1 missing value: %d baris, %d kolom." % df.shape)
+
+# Treatment untuk Missing Value - Part 3
+# %%
+import pandas as pd
+# Baca file "public data covid19 jhu csse eu.csv"
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/CHAPTER%204%20-%20missing%20value%20-%20public%20data%20covid19%20.csv")
+# Cetak unique value pada kolom province_state
+print("Unique value awal:\n", df["province_state"].unique())
+# Ganti missing value dengan string "unknown-province_state"
+df["province_state"] = df["province_state"].fillna("unknown_province_state")
+# Cetak kembali unique value pada kolom province_state
+print("Unique value setelah fillna:\n", df["province_state"].unique())
 # %%
