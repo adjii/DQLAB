@@ -331,4 +331,46 @@ print("Unique value awal:\n", df["province_state"].unique())
 df["province_state"] = df["province_state"].fillna("unknown_province_state")
 # Cetak kembali unique value pada kolom province_state
 print("Unique value setelah fillna:\n", df["province_state"].unique())
+
+# Treatment untuk Missing Value - Part 4
+# %%
+import pandas as pd
+# Baca file "https://storage.googleapis.com/dqlab-dataset/CHAPTER%204%20-%20value%20-%20public%20data%20covid19%20.csv"
+df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/CHAPTER%204%20-%20missing%20value%20-%20public%20data%20covid19%20.csv")
+# Cetak nilai mean dan median awal
+print("Awal: mean = %f, median = %f." % (df["active"].mean(), df["active"].median()))
+# Isi missing value kolom active dengan median
+df_median = df["active"].fillna(df["active"].median())
+# Cetak nilai mean dan median awal setelah diisi dengan median
+print("Fillna median: mean = %f, median = %f." % (df_median.mean(), df_median.median()))
+# Isi missing value kolom active dengan mean
+df_mean = df["active"].fillna(df["active"].mean())
+# Cetak nilai mean dan median awal setelah diisi dengan mean
+print("Fillna mean: mean = %f, median = %f." % (df_mean.mean(), df_mean.median()))
+
+# Treatment untuk Missing Value - Part 5
+# %%
+import numpy as np
+import pandas as pd
+# Data
+ts = pd.Series({
+    "2020-01-01":9,
+    "2020-01-02":np.nan,
+    "2020-01-05":np.nan,
+    "2020-01-07":24,
+    "2020-01-10":np.nan,
+    "2020-01-12":np.nan,
+    "2020-01-15":33,
+    "2020-01-17":np.nan,
+    "2020-01-16":40,
+    "2020-01-20":45,
+    "2020-01-22":52,
+    "2020-01-25":75,
+    "2020-01-28":np.nan,
+    "2020-01-30":np.nan
+})
+# Isi missing value menggunakan interpolasi linier
+ts = ts.interpolate()
+# Cetak time series setelah interpolasi linier
+print("Setelah diisi missing valuenya:\n", ts)
 # %%
