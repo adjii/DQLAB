@@ -196,4 +196,28 @@ print('Unstacking dataframe dengan level name:\n', data_unstack_2)
 # [3] Unstacking dengan specify level position
 data_unstack_3 = data.unstack(level=1)
 print('Unstacking dataframe dengan level position:\n', data_unstack_3)
+# Stack & Unstack - Part 2
+# [1] Stacking dataframe
+data_stack = data_unstack_3.stack()
+print('Stacked dataframe:\n', data_stack)
+# [2] Tukar posisi index setelah stacking dataframe
+data_swap = data_stack.swaplevel(1,2)
+print('Swapped data:\n', data_swap)
+# [3] Melakukan sort_index pada stacking dataframe
+data_sort = data_swap.sort_index()
+print('Sorted data:\n', data_sort)
+# %% [markdown]
+# __Review Inspeksi Data__
+# %%
+import pandas as pd
+# Load data global_air_quality.csv
+global_air_quality = pd.read_csv('https://storage.googleapis.com/dqlab-dataset/LO4/global_air_quality_4000rows.csv')
+print('Lima data teratas:\n', global_air_quality.head())
+# Melakukan pengecekan terhadap data
+print('Info global_air_quality:\n', global_air_quality.info())
+# Melakukan count tanpa groupby
+print('Count tanpa groupby:\n', global_air_quality.count())
+# Melakukan count dengan groupby
+gaq_groupby_count = global_air_quality.groupby('source_name').count()
+print('Count dengan groupby (5 data teratas):\n', gaq_groupby_count.head())
 # %%
