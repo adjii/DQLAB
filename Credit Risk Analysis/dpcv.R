@@ -8,4 +8,4 @@ str(dataCreditRating)
 dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)
 
 #Melihat struktur setelah konversi
-str(dataCreditRating)
+str(dataCreditRating)hh
