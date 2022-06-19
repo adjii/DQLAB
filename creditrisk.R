@@ -1,5 +1,6 @@
 library("openxlsx")
 library("C50")
+library("reshape2")
 
 #Mempersiapkan data
 dataCreditRating <- read.xlsx(xlsxFile = "https://storage.googleapis.com/dqlab-dataset/credit_scoring_dqlab.xlsx")
@@ -32,5 +33,16 @@ risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0
 summary(risk_rating_model)
 # plot(risk_rating_model)
 
-#menggunakan model untuk prediksi testing set
-predict(risk_rating_model, input_testing_set)
+#menyimpan hasil prediksi testing set ke dalam kolom hasil_prediksi
+input_testing_set$risk_rating <- dataCreditRating[-indeks_training_set,]$risk_rating
+input_testing_set$hasil_prediksi <- predict(risk_rating_model, input_testing_set)
+# print(input_testing_set)
+
+#membuat confusion matrix
+dcast(hasil_prediksi ~ risk_rating, data=input_testing_set)
+
+#Menghitung jumlah prediksi yang benar
+nrow(input_testing_set[input_testing_set$risk_rating==input_testing_set$hasil_prediksi,])
+
+#Menghitung jumlah prediksi yang salah
+nrow(input_testing_set[input_testing_set$risk_rating!=input_testing_set$hasil_prediksi,])
