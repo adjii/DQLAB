@@ -46,3 +46,9 @@ nrow(input_testing_set[input_testing_set$risk_rating==input_testing_set$hasil_pr
 
 #Menghitung jumlah prediksi yang salah
 nrow(input_testing_set[input_testing_set$risk_rating!=input_testing_set$hasil_prediksi,])
+
+#Membuat data frame aplikasi baru
+aplikasi_baru <- data.frame(jumlah_tanggungan = 6, durasi_pinjaman_bulan = 12)
+
+#melakukan prediksi
+predict(risk_rating_model, aplikasi_baru)
