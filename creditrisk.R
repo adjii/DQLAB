@@ -6,6 +6,11 @@ dataCreditRating <- read.xlsx(xlsxFile = "https://storage.googleapis.com/dqlab-d
 str(dataCreditRating)
 
 #Merubah tipe data class variable sebagai factor
+# dataCreditRating$risk_rating[dataCreditRating$risk_rating == "1"] <- "satu"
+# dataCreditRating$risk_rating[dataCreditRating$risk_rating == "2"] <- "dua"
+# dataCreditRating$risk_rating[dataCreditRating$risk_rating == "3"] <- "tiga"
+# dataCreditRating$risk_rating[dataCreditRating$risk_rating == "4"] <- "empat"
+# dataCreditRating$risk_rating[dataCreditRating$risk_rating == "5"] <- "lima"
 dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)
 
 #Menghilangkan beberapa variable input dari dataset
@@ -25,4 +30,7 @@ input_testing_set <- datafeed[-indeks_training_set,]
 #menghasilkan dan menampilkan summary model
 risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))
 summary(risk_rating_model)
-plot(risk_rating_model)
+# plot(risk_rating_model)
+
+#menggunakan model untuk prediksi testing set
+predict(risk_rating_model, input_testing_set)
